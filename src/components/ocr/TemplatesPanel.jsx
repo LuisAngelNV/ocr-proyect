@@ -352,114 +352,135 @@ const TemplatesPanel = ({ setExtractionTags }) => {
       {/* Modal de carga */}
       {isLoadOpen && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl shadow-2xl max-w-xl w-full p-5">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-base font-semibold text-gray-800">
-                Cargar Plantilla
-              </h3>
-              <button
-                onClick={() => setIsLoadOpen(false)}
-                className="px-3 py-1 text-xs bg-gray-100 rounded hover:bg-gray-200"
-              >
-                Cerrar
-              </button>
-            </div>
+          <FocusTrap onEscape={() => setIsLoadOpen(false)}>
+            <div
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="tpl-load-title"
+              className="bg-white rounded-xl shadow-2xl max-w-xl w-full p-5"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <h3
+                  id="tpl-load-title"
+                  className="text-base font-semibold text-gray-800"
+                >
+                  Cargar Plantilla
+                </h3>
+                <button
+                  onClick={() => setIsLoadOpen(false)}
+                  className="px-3 py-1 text-xs bg-gray-100 rounded hover:bg-gray-200"
+                >
+                  Cerrar
+                </button>
+              </div>
 
-            {templates.length === 0 ? (
-              <p className="text-sm text-gray-500">
-                No hay plantillas guardadas.
-              </p>
-            ) : (
-              <div className="space-y-2 max-h-[60vh] overflow-y-auto pr-1">
-                {templates.map((tpl) => (
-                  <div
-                    key={tpl.id}
-                    className="border border-gray-200 rounded-lg p-3 bg-white"
-                  >
-                    <div className="flex items-center justify-between gap-3">
-                      <div className="min-w-0">
-                        <p className="font-medium text-gray-800 truncate">
-                          {tpl.name}
-                        </p>
-                        <p className="text-xs text-gray-500">
-                          {tpl.tags?.length || 0} tags • Creada el{" "}
-                          {new Date(tpl.createdAt).toLocaleDateString()}
-                        </p>
-                        {tpl.lastUsed && (
-                          <p className="text-xs text-gray-400">
-                            Último uso:{" "}
-                            {new Date(tpl.lastUsed).toLocaleDateString()}
+              {templates.length === 0 ? (
+                <p className="text-sm text-gray-500">
+                  No hay plantillas guardadas.
+                </p>
+              ) : (
+                <div className="space-y-2 max-h-[60vh] overflow-y-auto pr-1">
+                  {templates.map((tpl) => (
+                    <div
+                      key={tpl.id}
+                      className="border border-gray-200 rounded-lg p-3 bg-white"
+                    >
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="min-w-0">
+                          <p className="font-medium text-gray-800 truncate">
+                            {tpl.name}
                           </p>
+                          <p className="text-xs text-gray-500">
+                            {tpl.tags?.length || 0} tags • Creada el{" "}
+                            {new Date(tpl.createdAt).toLocaleDateString()}
+                          </p>
+                          {tpl.lastUsed && (
+                            <p className="text-xs text-gray-400">
+                              Último uso:{" "}
+                              {new Date(tpl.lastUsed).toLocaleDateString()}
+                            </p>
+                          )}
+                        </div>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => applyTemplate(tpl)}
+                            className="px-3 py-1 text-xs bg-indigo-600 text-white rounded hover:bg-indigo-700"
+                          >
+                            Aplicar
+                          </button>
+                          <button
+                            onClick={() => deleteTemplate(tpl.id)}
+                            className="px-3 py-1 text-xs bg-red-100 text-red-700 rounded hover:bg-red-200"
+                          >
+                            Borrar
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="mt-2 flex flex-wrap gap-1">
+                        {(tpl.tags || []).slice(0, 8).map((t, i) => (
+                          <span
+                            key={i}
+                            className="px-2 py-[2px] text-[11px] rounded-full bg-gray-100 text-gray-700 border border-gray-200"
+                          >
+                            {t.key}
+                          </span>
+                        ))}
+                        {tpl.tags?.length > 8 && (
+                          <span className="px-2 py-[2px] text-[11px] rounded-full bg-gray-50 text-gray-500 border border-gray-200">
+                            +{tpl.tags.length - 8} más
+                          </span>
                         )}
                       </div>
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => applyTemplate(tpl)}
-                          className="px-3 py-1 text-xs bg-indigo-600 text-white rounded hover:bg-indigo-700"
-                        >
-                          Aplicar
-                        </button>
-                        <button
-                          onClick={() => deleteTemplate(tpl.id)}
-                          className="px-3 py-1 text-xs bg-red-100 text-red-700 rounded hover:bg-red-200"
-                        >
-                          Borrar
-                        </button>
-                      </div>
                     </div>
-
-                    <div className="mt-2 flex flex-wrap gap-1">
-                      {(tpl.tags || []).slice(0, 8).map((t, i) => (
-                        <span
-                          key={i}
-                          className="px-2 py-[2px] text-[11px] rounded-full bg-gray-100 text-gray-700 border border-gray-200"
-                        >
-                          {t.key}
-                        </span>
-                      ))}
-                      {tpl.tags?.length > 8 && (
-                        <span className="px-2 py-[2px] text-[11px] rounded-full bg-gray-50 text-gray-500 border border-gray-200">
-                          +{tpl.tags.length - 8} más
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </FocusTrap>
         </div>
       )}
 
       {/* Modal Renombrar */}
       {renameTarget && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-5">
-            <h3 className="text-base font-semibold text-gray-800 mb-3">
-              Renombrar plantilla
-            </h3>
-            <input
-              value={newName}
-              onChange={(e) => setNewName(e.target.value)}
-              className="input"
-              placeholder="Nuevo nombre"
-              aria-label="Nuevo nombre de la plantilla"
-            />
-            <div className="mt-4 flex justify-end gap-2">
-              <button
-                onClick={() => setRenameTarget(null)}
-                className="px-4 py-2 text-sm bg-gray-100 rounded hover:bg-gray-200"
+          <FocusTrap onEscape={() => setRenameTarget(null)}>
+            <div
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="tpl-rename-title"
+              className="bg-white rounded-xl shadow-2xl max-w-md w-full p-5"
+            >
+              <h3
+                id="tpl-rename-title"
+                className="text-base font-semibold text-gray-800 mb-3"
               >
-                Cancelar
-              </button>
-              <button
-                onClick={confirmRename}
-                className="px-4 py-2 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
-              >
-                Guardar
-              </button>
+                Renombrar plantilla
+              </h3>
+
+              <input
+                value={newName}
+                onChange={(e) => setNewName(e.target.value)}
+                className="input"
+                placeholder="Nuevo nombre"
+                aria-label="Nuevo nombre de la plantilla"
+              />
+              <div className="mt-4 flex justify-end gap-2">
+                <button
+                  onClick={() => setRenameTarget(null)}
+                  className="px-4 py-2 text-sm bg-gray-100 rounded hover:bg-gray-200"
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={confirmRename}
+                  className="px-4 py-2 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
+                >
+                  Guardar
+                </button>
+              </div>
             </div>
-          </div>
+          </FocusTrap>
         </div>
       )}
     </div>

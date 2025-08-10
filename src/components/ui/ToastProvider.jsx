@@ -18,20 +18,24 @@ export const ToastProvider = ({ children }) => {
       {children}
 
       {/* Contenedor de toasts (centro inferior) */}
-      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-[9999] space-y-2 pointer-events-none">
+      <div
+        className="fixed bottom-4 left-1/2 -translate-x-1/2 z-[9999] space-y-2 pointer-events-none"
+        aria-live="polite"
+        aria-atomic="true">
         {toasts.map((t) => (
           <div
             key={t.id}
+            role={t.variant === "error" ? "alert" : "status"}
             className={`pointer-events-auto px-4 py-2 rounded-md border text-sm shadow-card bg-white
-              ${
-                t.variant === "success"
-                  ? "bg-green-50 border-green-200 text-green-700"
-                  : t.variant === "warning"
-                  ? "bg-amber-50 border-amber-200 text-amber-700"
-                  : t.variant === "error"
-                  ? "bg-red-50 border-red-200 text-red-700"
-                  : "bg-white border-neutral-200 text-neutral-700"
-              }`}
+        ${
+          t.variant === "success"
+            ? "bg-green-50 border-green-200 text-green-700"
+            : t.variant === "warning"
+            ? "bg-amber-50 border-amber-200 text-amber-700"
+            : t.variant === "error"
+            ? "bg-red-50 border-red-200 text-red-700"
+            : "bg-white border-neutral-200 text-neutral-700"
+        }`}
           >
             <div className="flex items-center gap-3">
               <span>{t.message}</span>

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
+import { UI } from "../config/ui";
+import ErrorBoundary from "../components/errors/ErrorBoundary";
+import NiceFallback from "../components/errors/NiceFallback";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
-import { UI } from "../config/ui";
 
 const Layout = () => {
   const { SIDEBAR_ENABLED } = UI;
@@ -51,11 +53,16 @@ const Layout = () => {
           />
 
           <main className="px-4 md:px-6 lg:px-10 py-6">
-            <Outlet />
+            <ErrorBoundary fallback={<NiceFallback />}>
+              <Outlet />
+            </ErrorBoundary>
           </main>
 
           <footer className="px-4 md:px-6 lg:px-10 py-4 text-xs text-neutral-500">
-           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae temporibus minus neque? Alias qui tenetur itaque quo! Quaerat deleniti itaque blanditiis incidunt, at excepturi explicabo voluptatum error sapiente omnis. Molestias.
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            Repudiandae temporibus minus neque? Alias qui tenetur itaque quo!
+            Quaerat deleniti itaque blanditiis incidunt, at excepturi explicabo
+            voluptatum error sapiente omnis. Molestias.
           </footer>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useToast } from "../components/ui/ToastProvider";
+import useDebounce from "../hooks/useDebounce";
 import Tooltip from "../components/ui/Tooltip";
 
 const ApiHubPage = () => {
@@ -7,6 +8,8 @@ const ApiHubPage = () => {
   const [tags, setTags] = useState([]);
   const [query, setQuery] = useState("");
   const inputRef = useRef(null);
+  const debouncedQuery = useDebounce(query, 250);
+
 
   // Carga de tags desde localStorage
   useEffect(() => {
@@ -30,15 +33,15 @@ const ApiHubPage = () => {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return tags;
-    return tags.filter(
-      (t) =>
-        t.key.toLowerCase().includes(q) ||
-        (t.description || "").toLowerCase().includes(q)
-    );
-  }, [tags, query]);
+const filtered = useMemo(() => {
+  const q = debouncedQuery.trim().toLowerCase();
+  if (!q) return tags;
+  return tags.filter(
+    (t) =>
+      t.key.toLowerCase().includes(q) ||
+      (t.description || "").toLowerCase().includes(q)
+  );
+}, [tags, debouncedQuery]);
 
   const copy = (text, label = "Copiado al portapapeles") => {
     navigator.clipboard.writeText(text);

@@ -1,12 +1,25 @@
-# React + Vite
+# OCR Platform (React + Vite + Tailwind)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Scripts
 
-Currently, two official plugins are available:
+- `yarn dev` — desarrollo
+- `yarn build` — build
+- `yarn preview` — preview de build
+- `yarn test` — tests (Vitest + RTL)
+- `yarn lint` — lint
+- `yarn format` — formateo Prettier
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Estructura
 
-## Expanding the ESLint configuration
+- `src/pages/OcrPage.jsx` — flujo principal (upload, tags, preview, resultados)
+- `src/pages/ApiHubPage.jsx` — endpoints simulados y ejemplos
+- `src/components/ocr/*` — UI modular (UploadPdf, TagsManager, TemplatesPanel, etc.)
+- `src/components/ui/ToastProvider.jsx` — toasts globales (ARIA live)
+- `src/components/a11y/FocusTrap.jsx` — accesibilidad en modales
+- `src/components/errors/ErrorBoundary.jsx` — fallback visual de errores
+- `src/hooks/useDebounce.js` — debounce para buscadores
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Notas
+
+- Tailwind 3.x con utilidades en `index.css` (`.card`, `.btn-*`, `.input`, `.badge-*`)
+- Sidebar desactivado por defecto: `src/config/ui.js`
