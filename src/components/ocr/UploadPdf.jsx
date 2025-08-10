@@ -6,7 +6,6 @@ import { useToast } from "../ui/ToastProvider";
 const UploadPdf = ({
   file,
   setFile,
-  pdfPreviewUrl,
   setPdfPreviewUrl,
   showPdfPreview,
   setShowPdfPreview,

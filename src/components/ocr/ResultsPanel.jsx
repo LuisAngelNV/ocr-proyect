@@ -35,23 +35,19 @@ const ResultsPanel = ({
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold text-gray-800">Resultados OCR</h2>
         <div className="flex gap-2">
-          <button
-            onClick={downloadJson}
-            className="px-3 py-1 text-xs rounded-md bg-gray-100 hover:bg-gray-200 text-gray-700"
-            title="Descargar JSON"
-          >
+          <button onClick={downloadJson} className="btn-secondary">
             Descargar JSON
           </button>
           <button
             onClick={copyToClipboard}
-            className="p-2 bg-gray-100 rounded hover:bg-gray-200"
+            className="btn-ghost"
             title="Copiar JSON"
           >
             <Clipboard size={18} />
           </button>
           <button
             onClick={() => setExtractedJson(null)}
-            className="p-2 bg-red-100 text-red-700 rounded hover:bg-red-200"
+            className="btn-danger"
             title="Cerrar"
           >
             <X size={18} />

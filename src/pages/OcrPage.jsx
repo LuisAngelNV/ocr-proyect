@@ -89,7 +89,7 @@ const OcrPage = () => {
         {/* 📤 Columna izquierda */}
         <div className="space-y-6">
           {/* Upload */}
-          <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+          <div className="card">
             <UploadPdf
               file={file}
               setFile={setFile}
@@ -107,7 +107,7 @@ const OcrPage = () => {
           />
 
           {/* Manager con drag & drop y prioridades */}
-          <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+          <div className="card">
             <TagsManager
               extractionTags={extractionTags}
               setExtractionTags={setExtractionTags}
@@ -115,7 +115,7 @@ const OcrPage = () => {
           </div>
 
           {/* Sugeridos */}
-          <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+          <div className="card">
             <SuggestedTags
               extractionTags={extractionTags}
               setExtractionTags={setExtractionTags}
@@ -123,7 +123,7 @@ const OcrPage = () => {
           </div>
 
           {/* Plantillas (guardar/cargar/duplicar/renombrar/aplicar) */}
-          <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+          <div className="card">
             <TemplatesPanel setExtractionTags={setExtractionTags} />
           </div>
 
@@ -155,14 +155,14 @@ const OcrPage = () => {
         <div className="space-y-6">
           {/* Vista previa PDF (grande por defecto; expandible en el componente) */}
           {showPdfPreview && pdfPreviewUrl && (
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+            <div className="card">
               <PdfPreview pdfPreviewUrl={pdfPreviewUrl} />
             </div>
           )}
 
           {/* Resultados + resumen */}
           {extractedJson && (
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+            <div className="card">
               <ResultsPanel
                 extractedJson={extractedJson}
                 setExtractedJson={setExtractedJson}

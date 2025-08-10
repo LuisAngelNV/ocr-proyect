@@ -36,13 +36,13 @@ const AddTagForm = ({ extractionTags = [], setExtractionTags }) => {
           value={keyInput}
           onChange={(e) => setKeyInput(e.target.value)}
           placeholder="clave (ej. nombre)"
-          className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-indigo-300 focus:outline-none"
+          className="input" 
         />
         <input
           value={descInput}
           onChange={(e) => setDescInput(e.target.value)}
           placeholder="descripción"
-          className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-indigo-300 focus:outline-none"
+          className="input" 
         />
         <button
           onClick={addTag}
