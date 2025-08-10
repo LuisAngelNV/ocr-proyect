@@ -78,13 +78,6 @@ const OcrPage = () => {
   // ----------------------------
   return (
     <div className="min-h-[calc(100vh-0px)]">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Plataforma OCR AI</h1>
-        <p className="text-gray-600">
-          Extrae información de PDFs y prepara tus endpoints de integración.
-        </p>
-      </div>
-
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         {/* 📤 Columna izquierda */}
         <div className="space-y-6">

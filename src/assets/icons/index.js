@@ -7,3 +7,5 @@ export {  } from "lucide-react";
 
 export { FileText, Upload, Eye, Loader2, GripVertical, Plus, Trash2, ArrowUp, ArrowDown } from "lucide-react";
 export { Key, Star, Book, Code, Zap, Edit } from "lucide-react";
+export { Menu, ChevronLeft, ChevronRight } from "lucide-react";
+

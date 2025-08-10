@@ -2,11 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base: tipografías y focos */
+/* Base */
 @layer base {
-    :root {
-        --ring: 0 0% 100%;
-    }
 
     html,
     body,
@@ -39,7 +36,7 @@
     }
 }
 
-/* Components: tarjetas, inputs, botones */
+/* Components */
 @layer components {
     .card {
         @apply bg-white rounded-xl border border-neutral-200 shadow-card p-6;
